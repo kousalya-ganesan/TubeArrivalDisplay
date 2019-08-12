@@ -11,13 +11,18 @@
 
 	<properties>
 		<spring.version>[4.3.17,)</spring.version>
+		<jackson.databind.version>[2.9.9.2,)</jackson.databind.version>
+		<junit.version>4.12</junit.version>
+		<jackson.annotations.version>2.9.8</jackson.annotations.version>
+		<jstl.version>1.2</jstl.version>
+		
 	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.12</version>
+			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -44,20 +49,20 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-annotations</artifactId>
-			<version>2.9.8</version>
+			<version>${jackson.annotations.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>2.9.8</version>
+			<version>${jackson.databind.version}</version>
 		</dependency>
 
 		<!-- jstl dependencies -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
-			<version>1.2</version>
+			<version>${jstl.version}</version>
 		</dependency>
 	</dependencies>
 
