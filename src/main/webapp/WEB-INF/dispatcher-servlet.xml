@@ -24,4 +24,6 @@
 			<value>.jsp</value>
 		</property>
 	</bean>
+
+	<bean class="org.springframework.web.client.RestTemplate" />
 </beans>
