@@ -15,8 +15,8 @@ table.imagetable {
 	font-size: 11px;
 	border-width: 1px;
 	border-color: #999999;
-	overflow-y: auto;    /* Trigger vertical scroll    */
-    overflow-x: hidden
+	overflow-y: auto; /* Trigger vertical scroll    */
+	overflow-x: hidden
 }
 
 table.imagetable th {
@@ -60,6 +60,32 @@ body {
 
 	<table width="100%" class="imagetable">
 		<th colspan="7" style="background-color: SlateBlue"><font
+			size="+1">${westBoundTrainList}</font></th>
+		<tr>
+			<th>S.No</th>
+			<th>Platform Name</th>
+			<th>Towards</th>
+			<th>Time To Station(HH:mm:ss)</th>
+			<th>Expected Arrival</th>
+			<th>Destination</th>
+			<th>Current Location</th>
+		</tr>
+		<c:forEach var="westBoundTrain" items="${westBoundTrains}"
+			varStatus="loopCount">
+			<tr>
+				<td><c:out value="${loopCount.count}" /></td>
+				<td><c:out value="${westBoundTrain.platformName}" /></td>
+				<td><c:out value="${westBoundTrain.towards}" /></td>
+				<td><c:out value="${westBoundTrain.timeToStationInHHMM}" /></td>
+				<td><c:out value="${westBoundTrain.expectedArrival}" /></td>
+				<td><c:out value="${westBoundTrain.destinationName}" /></td>
+				<td><c:out value="${westBoundTrain.currentLocation}" /></td>
+			</tr>
+		</c:forEach>
+	</table>
+	<br />
+	<table width="100%" class="imagetable">
+		<th colspan="7" style="background-color: SlateBlue"><font
 			size="+1">${eastBoundTrainList}</font></th>
 		<tr>
 			<th>S.No</th>
@@ -71,9 +97,10 @@ body {
 			<th>Current Location</th>
 
 		</tr>
-		<c:forEach var="eastBoundTrain" items="${eastBoundTrains}" varStatus="loopCounter" >
+		<c:forEach var="eastBoundTrain" items="${eastBoundTrains}"
+			varStatus="loopCounter">
 			<tr>
-				<td><c:out value="${loopCounter.count}"/></td>
+				<td><c:out value="${loopCounter.count}" /></td>
 				<td><c:out value="${eastBoundTrain.platformName}" /></td>
 				<td><c:out value="${eastBoundTrain.towards}" /></td>
 				<td><c:out value="${eastBoundTrain.timeToStationInHHMM}" /></td>
@@ -84,30 +111,6 @@ body {
 		</c:forEach>
 	</table>
 
-	<br />
-	<table width="100%" class="imagetable">
-		<th colspan="7" style="background-color: SlateBlue"><font
-			size="+1">${westBoundTrainList}</font></th>
-		<tr>
-			<th>S.No</th>
-			<th>Platform Name</th>
-			<th>Towards</th>
-			<th>Time To Station(HH:mm:ss)</th>
-			<th>Expected Arrival</th>
-			<th>Destination</th>
-			<th>Current Location</th>
-		</tr>
-		<c:forEach var="westBoundTrain" items="${westBoundTrains}" varStatus="loopCount" >
-			<tr>
-				<td><c:out value="${loopCount.count}"/></td>
-				<td><c:out value="${westBoundTrain.platformName}" /></td>
-				<td><c:out value="${westBoundTrain.towards}" /></td>
-				<td><c:out value="${westBoundTrain.timeToStationInHHMM}" /></td>
-				<td><c:out value="${westBoundTrain.expectedArrival}" /></td>
-				<td><c:out value="${westBoundTrain.destinationName}" /></td>
-				<td><c:out value="${westBoundTrain.currentLocation}" /></td>
-			</tr>
-		</c:forEach>
-	</table>
+
 </body>
 </html>

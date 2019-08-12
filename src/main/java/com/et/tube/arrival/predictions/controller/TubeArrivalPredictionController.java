@@ -1,15 +1,7 @@
-/**
- * 
- */
 package com.et.tube.arrival.predictions.controller;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
-import java.util.TimeZone;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
@@ -24,6 +16,8 @@ import com.et.tube.arrival.predictions.domain.Prediction;
 import com.et.tube.arrival.predictions.util.TubeArrivalPredictionConstants;
 
 /**
+ * Entry point to get the tube arrival predictions from api.tfl.gov.uk
+ * 
  * @author Kousalya
  *
  */
@@ -34,6 +28,13 @@ public class TubeArrivalPredictionController {
 	@Autowired
 	RestTemplate restTemplate;
 
+	@Autowired
+	TubeArrivalPredictionControllerHelper helper;
+
+	/**
+	 * Handler Method to display the Tube arrival predictions and details of Tubes
+	 * 
+	 */
 	@RequestMapping("/tube/arrivals")
 	public ModelAndView showTubeArrival() {
 		String stationName = null;
@@ -52,19 +53,19 @@ public class TubeArrivalPredictionController {
 			stationName = pred.getStationName();
 			if (pred.getPlatformName().startsWith(TubeArrivalPredictionConstants.EASTBOUND)) {
 				pred.setPlatformName(pred.getPlatformName().substring(pred.getPlatformName().lastIndexOf('-') + 1));
-				pred.setTimeToStationInHHMM(convertSecsToMins(pred.getTimeToStation()));
-				
+				pred.setTimeToStationInHHMM(helper.convertSecsToMins(pred.getTimeToStation()));
+				pred.setExpectedArrival(helper.convertGmtToBst(pred.getExpectedArrival()));
 				eastBoundTrains.add(pred);
 			} else {
 				pred.setPlatformName(pred.getPlatformName().substring(pred.getPlatformName().lastIndexOf('-') + 1));
-				pred.setTimeToStationInHHMM(convertSecsToMins(pred.getTimeToStation()));
-				
+				pred.setTimeToStationInHHMM(helper.convertSecsToMins(pred.getTimeToStation()));
+				pred.setExpectedArrival(helper.convertGmtToBst(pred.getExpectedArrival()));
 				westBoundTrains.add(pred);
 			}
 		}
 
-		sortEastBoundTrains(eastBoundTrains);
-		sortWestBoundTrains(westBoundTrains);
+		helper.sortTrainsBasedOnTime(eastBoundTrains);
+		helper.sortTrainsBasedOnTime(westBoundTrains);
 
 		mv.addObject("eastBoundTrains", eastBoundTrains);
 		mv.addObject("eastBoundTrainList", TubeArrivalPredictionConstants.EASTBOUND_TITLE);
@@ -76,28 +77,4 @@ public class TubeArrivalPredictionController {
 		return mv;
 	}
 
-	private void sortWestBoundTrains(List<Prediction> westBoundTrains) {
-		Collections.sort(westBoundTrains, new Comparator<Prediction>() {
-			@Override
-			public int compare(Prediction o1, Prediction o2) {
-				return o1.getTimeToStation() - o2.getTimeToStation();
-			}
-		});
-	}
-
-	private void sortEastBoundTrains(List<Prediction> eastBoundTrains) {
-		Collections.sort(eastBoundTrains, new Comparator<Prediction>() {
-			@Override
-			public int compare(Prediction o1, Prediction o2) {
-				return o1.getTimeToStation() - o2.getTimeToStation();
-			}
-		});
-	}
-
-	private String convertSecsToMins(int seconds) {
-		Date date = new Date(seconds * 1000L);
-		SimpleDateFormat df = new SimpleDateFormat(TubeArrivalPredictionConstants.HH_mm_ss); // HH for 0-23
-		df.setTimeZone(TimeZone.getTimeZone(TubeArrivalPredictionConstants.GMT));
-		return df.format(date);
-	}
 }

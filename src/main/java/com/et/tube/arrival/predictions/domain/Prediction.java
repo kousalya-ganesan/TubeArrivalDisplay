@@ -6,23 +6,16 @@ package com.et.tube.arrival.predictions.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
+ * POJO for Tube Prediction
  * @author Kousalya
  *
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Prediction {
 
-	private int id;
-
-	private String operationType;
-
 	private int vehicleId;
 
-	private String naptanId;
-
 	private String stationName;
-
-	private String lineId;
 
 	private String lineName;
 
@@ -30,14 +23,12 @@ public class Prediction {
 
 	private String direction;
 
-	private String destinationNaptanId;
-
 	private String destinationName;
 
 	private String timestamp;
 
 	private int timeToStation;
-	
+
 	private String timeToStationInHHMM;
 
 	private String currentLocation;
@@ -46,37 +37,7 @@ public class Prediction {
 
 	private String expectedArrival;
 
-	private String timeToLive;
-
 	private String modeName;
-
-	/**
-	 * @return the id
-	 */
-	public int getId() {
-		return id;
-	}
-
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	/**
-	 * @return the operationType
-	 */
-	public String getOperationType() {
-		return operationType;
-	}
-
-	/**
-	 * @param operationType the operationType to set
-	 */
-	public void setOperationType(String operationType) {
-		this.operationType = operationType;
-	}
 
 	/**
 	 * @return the vehicleId
@@ -93,20 +54,6 @@ public class Prediction {
 	}
 
 	/**
-	 * @return the naptanId
-	 */
-	public String getNaptanId() {
-		return naptanId;
-	}
-
-	/**
-	 * @param naptanId the naptanId to set
-	 */
-	public void setNaptanId(String naptanId) {
-		this.naptanId = naptanId;
-	}
-
-	/**
 	 * @return the stationName
 	 */
 	public String getStationName() {
@@ -118,20 +65,6 @@ public class Prediction {
 	 */
 	public void setStationName(String stationName) {
 		this.stationName = stationName;
-	}
-
-	/**
-	 * @return the lineId
-	 */
-	public String getLineId() {
-		return lineId;
-	}
-
-	/**
-	 * @param lineId the lineId to set
-	 */
-	public void setLineId(String lineId) {
-		this.lineId = lineId;
 	}
 
 	/**
@@ -174,20 +107,6 @@ public class Prediction {
 	 */
 	public void setDirection(String direction) {
 		this.direction = direction;
-	}
-
-	/**
-	 * @return the destinationNaptanId
-	 */
-	public String getDestinationNaptanId() {
-		return destinationNaptanId;
-	}
-
-	/**
-	 * @param destinationNaptanId the destinationNaptanId to set
-	 */
-	public void setDestinationNaptanId(String destinationNaptanId) {
-		this.destinationNaptanId = destinationNaptanId;
 	}
 
 	/**
@@ -272,20 +191,6 @@ public class Prediction {
 	 */
 	public void setExpectedArrival(String expectedArrival) {
 		this.expectedArrival = expectedArrival;
-	}
-
-	/**
-	 * @return the timeToLive
-	 */
-	public String getTimeToLive() {
-		return timeToLive;
-	}
-
-	/**
-	 * @param timeToLive the timeToLive to set
-	 */
-	public void setTimeToLive(String timeToLive) {
-		this.timeToLive = timeToLive;
 	}
 
 	/**

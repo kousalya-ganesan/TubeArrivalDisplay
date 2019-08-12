@@ -13,7 +13,7 @@
 
 	<context:component-scan
 		base-package="com.et.tube.arrival.predictions" />
-		<task:annotation-driven/>
+	<task:annotation-driven />
 
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -26,4 +26,7 @@
 	</bean>
 
 	<bean class="org.springframework.web.client.RestTemplate" />
+
+	<bean
+		class="com.et.tube.arrival.predictions.controller.TubeArrivalPredictionControllerHelper" />
 </beans>
